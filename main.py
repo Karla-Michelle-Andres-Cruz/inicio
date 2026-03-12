@@ -7,13 +7,48 @@ container = ft.Container(
                 "iniciar sesion",
                 width = 320,
                 size = 30,
-                text_align = "center"
+                text_align = "center",
                 weight = "w900"
             ),
-            padding = ft.padding.only(20,20)
+            padding = ft.Padding.only(top=20, bottom=20)
         ),
-        ft.Conteiner(
-            
+        ft.Container(
+            ft.TextField(
+                width = 280,
+                height = 40,
+                hint_text = "Correo electronico",
+                border=ft.InputBorder.UNDERLINE,
+                color = "black",
+                prefix_icon = ft.Icons.EMAIL
+            ),
+            padding = ft.Padding.only(top=20, bottom=20)
+        ),
+        ft.Container(
+            ft.TextField(
+                width = 280,
+                height = 40,
+                hint_text = "Contraseña",
+                border=ft.InputBorder.UNDERLINE,
+                color = "black",
+                prefix_icon = ft.Icons.KEY,
+                password = True
+            ),
+            padding = ft.Padding.only(top=20, bottom=20)
+        ),
+        
+        ft.Container(
+            ft.Checkbox(
+                label="Recordar contraseña",
+                check_color = "black"
+            ),
+            padding = ft.Padding.all(80)
+        ),
+        ft.Container(
+            ft.ElevatedButton(
+                text = "Iniciar",
+                width= "280"
+            ),
+            padding=ft.Padding.only(top=20, bottom=20)
         )
     ],
     alignment=ft.MainAxisAlignment.SPACE_EVENLY
