@@ -3,9 +3,17 @@ import flet as ft
 container = ft.Container(
     ft.Column([
         ft.Container(
-            ft.text(
-                
-            )
+            ft.Text(
+                "iniciar sesion",
+                width = 320,
+                size = 30,
+                text_align = "center"
+                weight = "w900"
+            ),
+            padding = ft.padding.only(20,20)
+        ),
+        ft.Conteiner(
+            
         )
     ],
     alignment=ft.MainAxisAlignment.SPACE_EVENLY
