@@ -8,8 +8,8 @@ def recuperar_contraseña(e):
 
 def main(page: ft.Page):
 
-    page.title = "Login"
-    page.bgcolor = ft.Colors.BLACK
+    page.title = "Inicio de Sesión"
+    page.bgcolor = ft.Colors.WHITE
     page.vertical_alignment = "center"
     page.horizontal_alignment = "center"
 
@@ -47,7 +47,7 @@ def main(page: ft.Page):
             ]
         )
 
-        page.add(ft.Text("Bienvenido al sistema", size=30, color="white"))
+        page.add(ft.Text("Bienvenido a la pagina principal", size=30, color="black"))
         page.update()
 
     def login_click(e):
@@ -89,8 +89,8 @@ def main(page: ft.Page):
                     on_click=recuperar_contraseña
                 ),
 
-                ft.ElevatedButton(
-                    text="Iniciar",
+                ft.Button(
+                    content=ft.Text("Iniciar"),
                     width=280,
                     on_click=login_click
                 ),
@@ -104,7 +104,7 @@ def main(page: ft.Page):
         gradient=ft.LinearGradient([
             ft.Colors.PINK_200,
             ft.Colors.PURPLE_200,
-            ft.Colors.WHITE
+            ft.Colors.BLACK
         ])
     )
 
