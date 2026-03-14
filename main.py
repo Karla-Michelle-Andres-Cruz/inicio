@@ -3,9 +3,6 @@ import flet as ft
 USUARIO = "admin"
 CONTRASEÑA = "admin123"
 
-def recuperar_contraseña(e):
-    print("Recuperar contraseña")
-
 def main(page: ft.Page):
 
     page.title = "Inicio de Sesión"
@@ -13,25 +10,48 @@ def main(page: ft.Page):
     page.vertical_alignment = "center"
     page.horizontal_alignment = "center"
 
+    mensaje_recuperacion = ft.Text(
+        "",
+        size=12,
+        color="white",
+        text_align="center",
+    )
+
+    page.bottom_appbar = ft.BottomAppBar(
+        bgcolor=ft.Colors.BLACK,
+        height=50,
+        content=ft.Row(
+            [mensaje_recuperacion],
+            alignment=ft.MainAxisAlignment.CENTER
+        )
+    )
+
+
+    def recuperar_contraseña(e):
+        mensaje_recuperacion.value = "Hemos enviado los pasos para recuperar tu contraseña a tu correo electrónico."
+        page.update()
+
     txt_usuario = ft.TextField(
         width=280,
         height=40,
         hint_text="Correo electronico",
+        hint_style=ft.TextStyle(color="black"),
         border=ft.InputBorder.UNDERLINE,
         color="black",
         prefix_icon=ft.Icons.EMAIL,
-        on_submit=login_click
+        prefix_style=ft.TextStyle(color="black")
     )
 
     txt_contraseña = ft.TextField(
         width=280,
         height=40,
         hint_text="Contraseña",
+        hint_style=ft.TextStyle(color="black"),
         border=ft.InputBorder.UNDERLINE,
         color="black",
         prefix_icon=ft.Icons.KEY,
-        password=True,
-        on_submit=login_click
+        prefix_style=ft.TextStyle(color="black"),
+        password=True
     )
 
     def mostrar_contraseña(e):
@@ -84,16 +104,19 @@ def main(page: ft.Page):
             mostrar_pantalla_principal()
         else:
             error_dialog = ft.AlertDialog(
-            title=ft.Text("Error de Acceso"),
-            content=ft.Text("Usuario o contraseña incorrectos."),
-            actions=[
-                ft.TextButton("Entendido", on_click=cerrar_dialogo)
-            ]
-        )
+                title=ft.Text("Error de Acceso"),
+                content=ft.Text("Usuario o contraseña incorrectos."),
+                actions=[
+                    ft.TextButton("Entendido", on_click=cerrar_dialogo)
+                ]
+            )
 
-        page.dialog = error_dialog
-        error_dialog.open = True
-        page.update()
+            page.dialog = error_dialog
+            error_dialog.open = True
+            page.update()
+
+    txt_usuario.on_submit = login_click
+    txt_contraseña.on_submit = login_click
 
     container = ft.Container(
         ft.Column(
@@ -130,10 +153,12 @@ def main(page: ft.Page):
         gradient=ft.LinearGradient([
             ft.Colors.PINK_200,
             ft.Colors.PURPLE_200,
-            ft.Colors.BLACK
+            ft.Colors.PINK_200
         ])
     )
 
-    page.add(container)
+    page.add(
+        container
+    )
 
 ft.app(target=main)
