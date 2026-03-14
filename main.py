@@ -19,7 +19,8 @@ def main(page: ft.Page):
         hint_text="Correo electronico",
         border=ft.InputBorder.UNDERLINE,
         color="black",
-        prefix_icon=ft.Icons.EMAIL
+        prefix_icon=ft.Icons.EMAIL,
+        on_submit=login_click
     )
 
     txt_contraseña = ft.TextField(
@@ -29,7 +30,29 @@ def main(page: ft.Page):
         border=ft.InputBorder.UNDERLINE,
         color="black",
         prefix_icon=ft.Icons.KEY,
-        password=True
+        password=True,
+        on_submit=login_click
+    )
+
+    def mostrar_contraseña(e):
+        txt_contraseña.password = not txt_contraseña.password
+
+        if txt_contraseña.password:
+            txt_contraseña.suffix_icon = ft.IconButton(
+                icon=ft.Icons.VISIBILITY,
+                on_click=mostrar_contraseña
+            )
+        else:
+            txt_contraseña.suffix_icon = ft.IconButton(
+                icon=ft.Icons.VISIBILITY_OFF,
+                on_click=mostrar_contraseña
+            )
+
+        page.update()
+
+    txt_contraseña.suffix_icon = ft.IconButton(
+        icon=ft.Icons.VISIBILITY,
+        on_click=mostrar_contraseña
     )
 
     def cerrar_dialogo(e):
@@ -47,7 +70,10 @@ def main(page: ft.Page):
             ]
         )
 
-        page.add(ft.Text("Bienvenido a la pagina principal", size=30, color="black"))
+        page.add(
+            ft.Text("Bienvenido a la pagina principal", size=30, color="black")
+        )
+
         page.update()
 
     def login_click(e):
@@ -58,16 +84,16 @@ def main(page: ft.Page):
             mostrar_pantalla_principal()
         else:
             error_dialog = ft.AlertDialog(
-                title=ft.Text("Error de Acceso"),
-                content=ft.Text("Usuario o contraseña incorrectos."),
-                actions=[
-                    ft.TextButton("Entendido", on_click=cerrar_dialogo)
-                ]
-            )
+            title=ft.Text("Error de Acceso"),
+            content=ft.Text("Usuario o contraseña incorrectos."),
+            actions=[
+                ft.TextButton("Entendido", on_click=cerrar_dialogo)
+            ]
+        )
 
-            page.dialog = error_dialog
-            error_dialog.open = True
-            page.update()
+        page.dialog = error_dialog
+        error_dialog.open = True
+        page.update()
 
     container = ft.Container(
         ft.Column(
